@@ -8,6 +8,7 @@
 ### Requirements
 
 - OS: Ubuntu 18.04+
+- c++ compiler (g++, clang, etc.) `build-essential` package
 - Python 3.11+
 - Create virtual environment
 ```bash
@@ -16,7 +17,7 @@ python3 -m venv <env_name>
 source <env_name>/bin/activate
 
 # With Astral uv
-uv init
+uv sync
 ```
 - Installing dependencies
 ```bash
@@ -51,3 +52,26 @@ chmod +x ./run.sh
 # then run
 ```
 - Maybe run now by `double-click`
+
+### API
+
+- POST /generate-audio": "Generate audio from uploaded text file
+```bash
+# Input
+file: transcription_file_txt
+voice: optional_voice_name (default: bm_george)
+speed: optional_speed (default: 1.0)
+
+# Output
+message: "Audio generated successfully",
+audio_file_id: file_id,
+download_url="http://<your_domain>/download/<file_id>"
+```
+- GET /download/{file_id}": "Download generated audio file
+```bash
+# Input
+file_id: unique identifier for the audio file
+
+# Output
+audio file in response body
+```
